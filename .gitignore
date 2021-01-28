@@ -1,0 +1,8 @@
+# The preferred IDE/text editor for this project is VS Code
+
+.settings/*
+.vscode/*
+target/*
+
+.classpath
+.project

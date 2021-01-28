@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>io.github.logics4</groupId>
+    <artifactId>individualkeepinventory_b1.7.3</artifactId>
+    <packaging>jar</packaging>
+
+    <name>IndividualKeepInventory_b1.7.3</name>
+    <version>1.0.0-SNAPSHOT</version>
+    <description>Set keepInventory mechanic in a per-player way (through permission).</description>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.authors>"Logics4"</project.authors>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <!-- Bukkit API -->
+            <groupId>org.bukkit</groupId>
+            <artifactId>bukkit</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.spongepowered</groupId>
+            <artifactId>configurate-hocon</artifactId>
+            <version>3.7.1</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <filtering>true</filtering>
+                <directory>src/main/resources/</directory>
+                <targetPath>.</targetPath>
+                <includes>
+                    <include>*</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>.</directory>
+                <targetPath>.</targetPath>
+                <includes>
+                    <include>LICENSE.txt</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>.</directory>
+                <targetPath>META-INF/OTHER-LICENSES</targetPath>
+                <includes>
+                    <include>LICENSE.Apache_v2.0.txt</include>
+                </includes>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.4</version>
+                <configuration>
+                    <createDependencyReducedPom>false</createDependencyReducedPom>
+                    <minimizeJar>true</minimizeJar>
+                    <relocations>
+                        <relocation>
+                            <pattern>com.google</pattern>
+                            <shadedPattern>io.github.logics4.individualkeepinventory_b1_7_3.libs.google</shadedPattern>
+                        </relocation>
+                        <relocation>
+                            <pattern>com.typesafe.config</pattern>
+                            <shadedPattern>io.github.logics4.individualkeepinventory_b1_7_3.libs.typesafe-config</shadedPattern>
+                        </relocation>
+                        <relocation>
+                            <pattern>javax.inject</pattern>
+                            <shadedPattern>io.github.logics4.individualkeepinventory_b1_7_3.libs.javax-inject</shadedPattern>
+                        </relocation>
+                        <relocation>
+                            <pattern>ninja.leaping.configurate</pattern>
+                            <shadedPattern>io.github.logics4.individualkeepinventory_b1_7_3.libs.configurate</shadedPattern>
+                        </relocation>
+                        <relocation>
+                            <pattern>org.aopalliance</pattern>
+                            <shadedPattern>io.github.logics4.individualkeepinventory_b1_7_3.libs.aopalliance</shadedPattern>
+                        </relocation>
+                        <relocation>
+                            <pattern>org.checkerframework</pattern>
+                            <shadedPattern>io.github.logics4.individualkeepinventory_b1_7_3.libs.checkerframework</shadedPattern>
+                        </relocation>
+                    </relocations>
+                    <filters>
+                        <filter>
+                            <artifact>org.spongepowered:configurate-hocon</artifact>
+                            <excludes>
+                                <exclude>META-INF/**</exclude>
+                                <exclude>LICENSE_configurate-hocon</exclude> <!-- We already include the Apache v2.0 license in the JAR -->
+                            </excludes>
+                        </filter>
+                        <filter>
+                            <artifact>org.spongepowered:configurate-core</artifact>
+                            <excludes>
+                                <exclude>META-INF/**</exclude>
+                                <exclude>LICENSE_configurate-core</exclude> <!-- We already include the Apache v2.0 license in the JAR -->
+                            </excludes>
+                        </filter>
+                        <filter>
+                            <artifact>com.google.guava:guava</artifact>
+                            <excludes>
+                                <exclude>META-INF/MANIFEST.MF</exclude>
+                            </excludes>
+                        </filter>
+                        <filter>
+                            <artifact>org.checkerframework:checker-qual</artifact>
+                            <excludes>
+                                <exclude>META-INF/MANIFEST.MF</exclude>
+                            </excludes>
+                        </filter>
+                        <filter>
+                            <artifact>com.google.inject:guice</artifact>
+                            <excludes>
+                                <exclude>META-INF/MANIFEST.MF</exclude>
+                                <exclude>META-INF/LICENSE</exclude> <!-- We already include the Apache v2.0 license in the JAR -->
+                            </excludes>
+                        </filter>
+                        <filter>
+                            <artifact>javax.inject:javax.inject</artifact>
+                            <excludes>
+                                <exclude>META-INF/MANIFEST.MF</exclude>
+                            </excludes>
+                        </filter>
+                        <filter>
+                            <artifact>aopalliance:aopalliance</artifact>
+                            <excludes>
+                                <exclude>META-INF/MANIFEST.MF</exclude>
+                            </excludes>
+                        </filter>
+                        <filter>
+                            <artifact>com.typesafe:config</artifact>
+                            <excludes>
+                                <exclude>META-INF/MANIFEST.MF</exclude>
+                            </excludes>
+                        </filter>
+                    </filters>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
