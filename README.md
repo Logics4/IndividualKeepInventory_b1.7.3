@@ -46,4 +46,4 @@ The plugin should be in `<project's root>/jar/target/`, named `individualkeepinv
 This project's source code is licensed under the General Public License version 3 (GPLv3), except for the following file(s):
 - HOCONConfig.java (part of the [CommonClasses-Java project, Config module](https://github.com/Logics4/CommonClasses-Java/tree/main/Config)), located in the `io/github/logics4/individualkeepinventory_b1_7_3` package, which is under the Apache License version 2.0.</br>
 
-You can find a full copy of the GPLv3 in the LICENSE.txt file, and a full copy of the Apache License version 2.0 in the LICENSE.Apache_v2.0.txt file, both at the root directory of this source code.
+You can find a full copy of the GPLv3 in the [LICENSE.txt](https://github.com/Logics4/IndividualKeepInventory_b1.7.3/blob/main/LICENSE.txt) file, and a full copy of the Apache License version 2.0 in the [LICENSE.Apache_v2.0.txt](https://github.com/Logics4/IndividualKeepInventory_b1.7.3/blob/main/LICENSE.Apache_v2.0.txt) file, both at the root directory of this source code.
