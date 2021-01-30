@@ -1,4 +1,4 @@
-# Individual Keep-Inventory (for Bukkit and Sponge)
+# Individual Keep-Inventory (Craftbukkit 1092 - Beta 1.7.3)
 This is a simple plugin I have made, which allows you to set the `keepInventory` mechanic in Minecraft in a per-player way.
 </br></br>
 
