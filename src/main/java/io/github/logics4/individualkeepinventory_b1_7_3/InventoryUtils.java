@@ -31,7 +31,7 @@ import org.bukkit.inventory.PlayerInventory;
 
 public class InventoryUtils {
 
-    public static void setInventoryToConfig(Player player, CommentedConfigurationNode invtrack) {
+    static void setInventoryToConfig(Player player, CommentedConfigurationNode invtrack) {
         CommentedConfigurationNode invNode = invtrack.getNode(player.getUniqueId().toString()).getNode(INV_NODESTR.get());
 
         PlayerInventory playerInventory = player.getInventory();
@@ -84,11 +84,11 @@ public class InventoryUtils {
         }
     }
 
-    public static void unsetInventoryFromConfig(Player player, CommentedConfigurationNode invtrack) {
+    static void unsetInventoryFromConfig(Player player, CommentedConfigurationNode invtrack) {
         invtrack.getNode(player.getUniqueId().toString()).getNode(INV_NODESTR.get()).setValue(null);
     }
 
-    public static void giveInventoryBack(Player player, CommentedConfigurationNode invtrack) {
+    static void giveInventoryBack(Player player, CommentedConfigurationNode invtrack) {
         PlayerInventory playerInventory = player.getInventory();
         CommentedConfigurationNode invNode = invtrack.getNode(player.getUniqueId().toString()).getNode(INV_NODESTR.get());
 

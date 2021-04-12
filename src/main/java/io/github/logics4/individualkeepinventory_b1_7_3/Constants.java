@@ -22,11 +22,11 @@ package io.github.logics4.individualkeepinventory_b1_7_3;
 
 public class Constants {
 
-    public static final String INVTRACK_FILENAME = "inventory-tracking.conf";
+    static final String INVTRACK_FILENAME = "inventory-tracking.conf";
 
-    public static final String INJAR_ASSETS_FOLDER = "/assets/";
+    static final String INJAR_ASSETS_FOLDER = "/assets/";
 
-    public enum InvtrackNodeStrings {
+    enum InvtrackNodeStrings {
         GAVE_ITEMS_BACK_NODESTR("gave-items-back"),
         INV_NODESTR("inventory"),
         INV_SLOT_ITEMID_NODESTR("id"),
@@ -40,7 +40,7 @@ public class Constants {
 
         private String nodeStr;
 
-        public String get() {
+        String get() {
             return nodeStr;
         }
         InvtrackNodeStrings(String nodeStr) {
@@ -48,5 +48,5 @@ public class Constants {
         }
     }
 
-    public static final String IKI_KEEPINVENTORY_PERMISSION = "iki.events.playerdeath.keepinventory";
+    static final String IKI_KEEPINVENTORY_PERMISSION = "iki.events.playerdeath.keepinventory";
 }
