@@ -14,7 +14,6 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.authors>"Logics4"</project.authors>
     </properties>
 
     <dependencies>
