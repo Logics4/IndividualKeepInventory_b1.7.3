@@ -20,30 +20,34 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 package io.github.logics4.individualkeepinventory_b1_7_3;
 
-import java.io.IOException;
-import java.util.logging.Level;
+import io.github.logics4.commonclasses.config.CommentedConfigFile;
+import io.github.logics4.commonclasses.config.ConfigFileFormat;
 
-import ninja.leaping.configurate.commented.CommentedConfigurationNode;
+import java.nio.file.Path;
 
 import org.bukkit.event.Event.Priority;
 import org.bukkit.event.Event.Type;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class IKI extends JavaPlugin {
-    public HOCONConfig invtrackFile;
-    public CommentedConfigurationNode invtrack;
+    private CommentedConfigFile invtrack;
+    private Path dataFolderPath;
+
+    CommentedConfigFile invtrackFile() {
+        return invtrack;
+    }
+
+    Path dataFolderPath() {
+        return dataFolderPath;
+    }
 
     @Override
     public void onEnable() {
-        invtrackFile = new HOCONConfig(getDataFolder().toPath(), Constants.INVTRACK_FILENAME);
-        try {
-            invtrackFile.extractFromJar(Constants.PROVIDED_INVTRACK_FILEPATH, false);
-            invtrack = invtrackFile.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-            getServer().getLogger().log(Level.SEVERE, "Could not get " + Constants.INVTRACK_FILENAME + " ready to use! The plugin cannot work without it, disabling...");
-            getPluginLoader().disablePlugin(this);
-        }
+        dataFolderPath = getDataFolder().toPath();
+
+        invtrack = new CommentedConfigFile(ConfigFileFormat.HOCON, dataFolderPath(), Constants.INVTRACK_FILENAME);
+        invtrack.extractFromJar(Constants.INJAR_ASSETS_FOLDER, false);
+        invtrack.loadConfig();
 
         PlayerDeathChecker onEntityDeath = new PlayerDeathChecker(this);
         PlayerRespawnChecker onPlayerRespawn = new PlayerRespawnChecker(this);

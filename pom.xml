@@ -10,11 +10,18 @@
 
     <name>IndividualKeepInventory_b1.7.3</name>
     <version>1.0.0-SNAPSHOT</version>
-    <description>Set keepInventory mechanic in a per-player way (through permission).</description>
+    <description>Implement keepInventory mechanic in Minecraft Beta 1.7.3 - and in a permission-based way.</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
 
     <dependencies>
         <dependency>
@@ -26,9 +33,18 @@
         </dependency>
 
         <dependency>
+            <!-- Config module of my CommonClasses-Java collection -->
+            <groupId>com.github.Logics4.CommonClasses-Java</groupId>
+            <artifactId>commonclasses-config</artifactId>
+            <version>59862e249e213e3762c17929b90a07539d1f170e</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <!-- Needed for CommonClasses-Config above -->
             <groupId>org.spongepowered</groupId>
             <artifactId>configurate-hocon</artifactId>
-            <version>3.7.1</version>
+            <version>3.7.2</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
@@ -36,9 +52,17 @@
     <build>
         <resources>
             <resource>
+                <targetPath>.</targetPath>
                 <filtering>true</filtering>
                 <directory>src/main/resources/</directory>
-                <targetPath>.</targetPath>
+                <includes>
+                    <include>*</include>
+                </includes>
+            </resource>
+            <resource>
+                <targetPath>./assets/</targetPath>
+                <filtering>false</filtering>
+                <directory>src/main/resources/assets/</directory>
                 <includes>
                     <include>*</include>
                 </includes>
@@ -48,13 +72,6 @@
                 <targetPath>.</targetPath>
                 <includes>
                     <include>LICENSE.txt</include>
-                </includes>
-            </resource>
-            <resource>
-                <directory>.</directory>
-                <targetPath>META-INF/OTHER-LICENSES</targetPath>
-                <includes>
-                    <include>LICENSE.Apache_v2.0.txt</include>
                 </includes>
             </resource>
         </resources>
@@ -77,16 +94,20 @@
                     <minimizeJar>true</minimizeJar>
                     <relocations>
                         <relocation>
+                            <pattern>io.github.logics4.commonclasses.config</pattern>
+                            <shadedPattern>io.github.logics4.individualkeepinventory_b1_7_3.libs.commonclasses_config</shadedPattern>
+                        </relocation>
+                        <relocation>
                             <pattern>com.google</pattern>
                             <shadedPattern>io.github.logics4.individualkeepinventory_b1_7_3.libs.google</shadedPattern>
                         </relocation>
                         <relocation>
                             <pattern>com.typesafe.config</pattern>
-                            <shadedPattern>io.github.logics4.individualkeepinventory_b1_7_3.libs.typesafe-config</shadedPattern>
+                            <shadedPattern>io.github.logics4.individualkeepinventory_b1_7_3.libs.typesafe_config</shadedPattern>
                         </relocation>
                         <relocation>
                             <pattern>javax.inject</pattern>
-                            <shadedPattern>io.github.logics4.individualkeepinventory_b1_7_3.libs.javax-inject</shadedPattern>
+                            <shadedPattern>io.github.logics4.individualkeepinventory_b1_7_3.libs.javax_inject</shadedPattern>
                         </relocation>
                         <relocation>
                             <pattern>ninja.leaping.configurate</pattern>
@@ -103,17 +124,21 @@
                     </relocations>
                     <filters>
                         <filter>
+                            <artifact>com.github.Logics4.CommonClasses-Java:commonclasses-config</artifact>
+                            <excludes>
+                                <exclude>META-INF/MANIFEST.MF</exclude>
+                            </excludes>
+                        </filter>
+                        <filter>
                             <artifact>org.spongepowered:configurate-hocon</artifact>
                             <excludes>
-                                <exclude>META-INF/**</exclude>
-                                <exclude>LICENSE_configurate-hocon</exclude> <!-- We already include the Apache v2.0 license in the JAR -->
+                                <exclude>META-INF/MANIFEST.MF</exclude>
                             </excludes>
                         </filter>
                         <filter>
                             <artifact>org.spongepowered:configurate-core</artifact>
                             <excludes>
-                                <exclude>META-INF/**</exclude>
-                                <exclude>LICENSE_configurate-core</exclude> <!-- We already include the Apache v2.0 license in the JAR -->
+                                <exclude>META-INF/MANIFEST.MF</exclude>
                             </excludes>
                         </filter>
                         <filter>
@@ -132,7 +157,6 @@
                             <artifact>com.google.inject:guice</artifact>
                             <excludes>
                                 <exclude>META-INF/MANIFEST.MF</exclude>
-                                <exclude>META-INF/LICENSE</exclude> <!-- We already include the Apache v2.0 license in the JAR -->
                             </excludes>
                         </filter>
                         <filter>

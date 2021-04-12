@@ -22,11 +22,9 @@ package io.github.logics4.individualkeepinventory_b1_7_3;
 
 public class Constants {
 
-    public static final String CONFIG_FILENAME = "config.conf";
-    public static final String PROVIDED_CONFIG_FILEPATH = "/" + Constants.CONFIG_FILENAME;
-
     public static final String INVTRACK_FILENAME = "inventory-tracking.conf";
-    public static final String PROVIDED_INVTRACK_FILEPATH = "/" + Constants.INVTRACK_FILENAME;
+
+    public static final String INJAR_ASSETS_FOLDER = "/assets/";
 
     public enum InvtrackNodeStrings {
         GAVE_ITEMS_BACK_NODESTR("gave-items-back"),

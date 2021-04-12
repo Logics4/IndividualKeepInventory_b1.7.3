@@ -22,7 +22,7 @@ package io.github.logics4.individualkeepinventory_b1_7_3;
 
 import static io.github.logics4.individualkeepinventory_b1_7_3.Constants.InvtrackNodeStrings.*;
 
-import java.io.IOException;
+import io.github.logics4.commonclasses.config.exceptions.ConfigSaveFailureException;
 
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
 
@@ -41,19 +41,19 @@ public class PlayerRespawnChecker extends PlayerListener {
     @Override
     public void onPlayerRespawn(PlayerRespawnEvent event) {
         Player player = event.getPlayer();
-        CommentedConfigurationNode gaveItemsBackNode = plugin.invtrack.getNode(player.getUniqueId().toString()).getNode(GAVE_ITEMS_BACK_NODESTR.get());
+        CommentedConfigurationNode gaveItemsBackNode = plugin.invtrackFile().getConfig().getNode(player.getUniqueId().toString()).getNode(GAVE_ITEMS_BACK_NODESTR.get());
 
         if (player.hasPermission(Constants.IKI_KEEPINVENTORY_PERMISSION) || !gaveItemsBackNode.getBoolean()) {
-            InventoryUtils.giveInventoryBack(player, plugin.invtrack);
-            InventoryUtils.unsetInventoryFromConfig(player, plugin.invtrack);
+            InventoryUtils.giveInventoryBack(player, plugin.invtrackFile().getConfig());
+            InventoryUtils.unsetInventoryFromConfig(player, plugin.invtrackFile().getConfig());
             gaveItemsBackNode.setValue(true);
 
             Bukkit.getScheduler().scheduleAsyncDelayedTask(this.plugin, new Runnable() {
                 @Override
                 public void run() {
                     try {
-                        plugin.invtrackFile.save();
-                    } catch (IOException e) {
+                        plugin.invtrackFile().saveConfig();
+                    } catch (ConfigSaveFailureException e) {
                         e.printStackTrace();
                     }
                 }

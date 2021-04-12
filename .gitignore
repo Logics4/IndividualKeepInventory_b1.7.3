@@ -1,8 +1,8 @@
-# The preferred IDE/text editor for this project is VS Code
+# This .gitignore file was written with VSCode (and Maven) in mind.
+# If you use other IDE, please add the relevant IDE-specific files here.
 
 .settings/*
 .vscode/*
 target/*
-
 .classpath
 .project

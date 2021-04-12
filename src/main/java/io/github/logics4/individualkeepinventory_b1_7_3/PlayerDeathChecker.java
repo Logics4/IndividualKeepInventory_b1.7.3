@@ -22,7 +22,7 @@ package io.github.logics4.individualkeepinventory_b1_7_3;
 
 import static io.github.logics4.individualkeepinventory_b1_7_3.Constants.InvtrackNodeStrings.*;
 
-import java.io.IOException;
+import io.github.logics4.commonclasses.config.exceptions.ConfigSaveFailureException;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
@@ -45,16 +45,16 @@ public class PlayerDeathChecker extends EntityListener {
             Player player = ((Player) entity);
 
             if (player.hasPermission(Constants.IKI_KEEPINVENTORY_PERMISSION)) {
-                InventoryUtils.setInventoryToConfig(player, plugin.invtrack);
+                InventoryUtils.setInventoryToConfig(player, plugin.invtrackFile().getConfig());
 
-                plugin.invtrack.getNode(player.getUniqueId().toString()).getNode(GAVE_ITEMS_BACK_NODESTR.get()).setValue(false);
+                plugin.invtrackFile().getConfig().getNode(player.getUniqueId().toString()).getNode(GAVE_ITEMS_BACK_NODESTR.get()).setValue(false);
 
                 Bukkit.getScheduler().scheduleAsyncDelayedTask(this.plugin, new Runnable() {
                     @Override
                     public void run() {
                         try {
-                            plugin.invtrackFile.save();
-                        } catch (IOException e) {
+                            plugin.invtrackFile().saveConfig();;
+                        } catch (ConfigSaveFailureException e) {
                             e.printStackTrace();
                         }
                     }
