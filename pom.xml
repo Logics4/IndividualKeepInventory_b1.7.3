@@ -19,11 +19,11 @@
 
     <dependencies>
         <dependency>
-            <!-- Bukkit API -->
             <groupId>org.bukkit</groupId>
-            <artifactId>bukkit</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>provided</scope>
+            <artifactId>bukkit-api</artifactId>
+            <version>b1.7.3</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/bukkit-api-b1.7.3.jar</systemPath>
         </dependency>
 
         <dependency>
